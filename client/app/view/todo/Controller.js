@@ -127,8 +127,9 @@ Ext.define('Todo.view.todo.Controller', {
 	},
 
 	onCancelClick: function() {
-		var todo = this.getViewModel().get('selectedTodo');
-		todo.cancelEdit();
+		var form = this.lookup('todoForm').getForm();
+		form.reset();
+		this.getViewModel().set('showEdit', false);
 		this.getViewModel().set('selectedTodo', null);
 	}
 
