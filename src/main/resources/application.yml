@@ -1,0 +1,35 @@
+mongodb:
+  uri: mongodb://localhost/todo?w=1&wtimeoutMS=0&journal=true
+
+server:
+  port: 80
+  session:
+    timeout: 480
+  compression:
+     enabled: true
+     mime-types: text/html,text/xml,text/plain,text/css,application/json,application/javascript
+  use-forward-headers: true
+
+spring:
+  jackson:
+    serialization:
+      write-date-timestamps-as-nanoseconds: false
+  
+  resources:
+    cache-period: 31556926
+  
+  mvc:
+    favicon:
+      enabled: false
+
+  main:
+    banner-mode: log 
+
+    
+logging:
+  level:
+    org.springframework: WARN
+    org.mongodb: WARN
+    org.apache: WARN
+    ch: WARN
+  file: ./app.log
