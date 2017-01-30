@@ -1,5 +1,6 @@
 package ch.rasc.todo.service;
 
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class ChangesService {
 			ImmutableAudit.Builder builder = ImmutableAudit.builder();
 			builder.todoId((String) change.getAffectedLocalId());
 			builder.timestamp(change.getCommitMetadata().get().getCommitDate()
-					.toDateTime().getMillis());
+					.toEpochSecond(ZoneOffset.UTC));
 			if (change instanceof NewObject) {
 				builder.type(AuditType.INSERT);
 			}
