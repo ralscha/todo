@@ -11,21 +11,21 @@ Ext.define('Todo.view.main.MainController', {
 		}
 	},
 
-	routeToTodo: function() {
+	routeToTodo() {
 		this.switchTab(0);
 	},
 
-	routeToChanges: function() {
+	routeToChanges() {
 		this.switchTab(1);
 	},
 
-	switchTab: function(no) {
+	switchTab(no) {
 		this.getView().suspendEvents(false);
 		this.getView().setActiveTab(no);
 		this.getView().resumeEvents(false);
 	},
 
-	onBeforeTabChange: function(tabPanel, newCard) {
+	onBeforeTabChange(tabPanel, newCard) {
 		if (newCard.xclass === 'Todo.view.changes.View') {
 			this.redirectTo('changes');
 			document.title = 'Changes';

@@ -1,16 +1,16 @@
 Ext.define('Todo.view.todo.Controller', {
 	extend: 'Ext.app.ViewController',
 
-	init: function() {
+	init() {
 		this.getStore('tags').load();
 	},
 	
 	
-	tagsRenderer: function(value) {
+	tagsRenderer(value) {
 		if (Ext.isArray(value)) {
-			var result = '';
-			var ix;
-			for (ix = 0; ix < value.length; ix++) {
+			let result = '';
+
+			for (let ix = 0; ix < value.length; ix++) {
 				result += "<span class=\"label label-info\">";
 				result += value[ix];
 				result += "</span>";
@@ -20,29 +20,29 @@ Ext.define('Todo.view.todo.Controller', {
 		return value;
 	},
 	
-	onItemclick: function(grid, record) {
-		var form = this.lookup('todoForm').getForm();
+	onItemclick(grid, record) {
+		const form = this.lookup('todoForm').getForm();
 		form.reset();
 		form.loadRecord(record);
 		form.isValid();
 		this.getViewModel().set('showEdit', true);
 	},
 
-	onNewClick: function() {
-		var newTodo = new Todo.model.Todo();
+	onNewClick() {
+		const newTodo = new Todo.model.Todo();
 		this.getViewModel().set('selectedTodo', null);		
 		this.onItemclick(null, newTodo);
 	},
 
-	onDeleteClick: function() {
-		var todo = this.getViewModel().get('selectedTodo');
-		var me = this;
+	onDeleteClick() {
+		const todo = this.getViewModel().get('selectedTodo');
+		const me = this;
 		Ext.Msg.confirm('Attention', 'Do you really want to delete: ' + todo.get('title'), function(choice) {
 			if (choice === 'yes') {
 				todo.erase({
-		            success: function(record, operation) {
+		            success(record, operation) {
 						me.getStore('tags').load();
-						var form = me.lookup('todoForm').getForm();
+						const form = me.lookup('todoForm').getForm();
 						form.reset();
 						me.getViewModel().set('showEdit', false);
 						me.getViewModel().set('selectedTodo', null);
@@ -52,16 +52,16 @@ Ext.define('Todo.view.todo.Controller', {
 		}, this);
 	},
 
-	onSearchChange: function(m) {
+	onSearchChange(m) {
 		this.getViewModel().set('searchButtonText', 'Search ' + m.text);
 		this.lookup('searchButton').filterField = m.filterField;
 	},
 
-	onSearchClick: function() {
+	onSearchClick() {
 		this.getViewModel().set('selectedTodo', null);
-		var store = this.getStore('todos');
-		var value = this.lookup('filterTf').getValue();
-		var filterType = this.lookup('searchButton').filterField;
+		const store = this.getStore('todos');
+		const value = this.lookup('filterTf').getValue();
+		const filterType = this.lookup('searchButton').filterField;
 
 		if (value) {
 			if (filterType === 'title') {
@@ -75,7 +75,7 @@ Ext.define('Todo.view.todo.Controller', {
 			else if (filterType === 'tags') {
 				store.clearFilter();
 				store.filterBy(function(r) {
-					var tags = r.get('tags');
+					const tags = r.get('tags');
 					if (tags) {
 						return tags.indexOf(value) !== -1;
 					}
@@ -88,46 +88,46 @@ Ext.define('Todo.view.todo.Controller', {
 		}
 	},
 
-	onSaveClick: function() {
-		var form = this.lookup('todoForm').getForm();
+	onSaveClick() {
+		const form = this.lookup('todoForm').getForm();
 		if (form.isValid()) {
 			this.getView().mask('Saving...');
 
 			form.updateRecord();
-			var record = form.getRecord()
-			var isPhantom = record.phantom;
+			const record = form.getRecord()
+			const isPhantom = record.phantom;
 
 			record.save({
 				scope: this,
-				success: function(record, operation) {
+				success(record, operation) {
 					if (isPhantom) {
-						var store = this.getStore('todos');
+						const store = this.getStore('todos');
 						store.add(record);
 					}
 					this.getStore('tags').load();
 				},
-				failure: function(record, operation) {
-					var validations = operation.getResponse().result.validations;
+				failure(record, operation) {
+					const validations = operation.getResponse().result.validations;
 					this.markInvalidFields(form, validations);
 				},
-				callback: function(record, operation, success) {
+				callback(record, operation, success) {
 					this.getView().unmask();
 				}
 			});
 		}
 	},
 
-	markInvalidFields: function(form, validations) {
+	markInvalidFields(form, validations) {
 		validations.forEach(function(validation) {
-			var field = form.findField(validation.field);
+			const field = form.findField(validation.field);
 			if (field) {
 				field.markInvalid(validation.messages);
 			}
 		});
 	},
 
-	onCancelClick: function() {
-		var form = this.lookup('todoForm').getForm();
+	onCancelClick() {
+		const form = this.lookup('todoForm').getForm();
 		form.reset();
 		this.getViewModel().set('showEdit', false);
 		this.getViewModel().set('selectedTodo', null);

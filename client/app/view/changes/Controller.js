@@ -1,8 +1,8 @@
 Ext.define('Todo.view.changes.Controller', {
 	extend: 'Ext.app.ViewController',
 
-	init: function() {
-		var me = this;
+	init() {
+		const me = this;
 		me.onHistoryChangeCallback = me.onHistoryChange.bind(me);
 
 		Todo.EventBus.start(function() {
@@ -10,12 +10,12 @@ Ext.define('Todo.view.changes.Controller', {
 		});
 	},
 
-	destroy: function() {
+	destroy() {
 		Todo.EventBus.unsubscribe("historychange", this.onHistoryChangeCallback);
 		Todo.EventBus.stop();
 	},
 
-	onHistoryChange: function() {
+	onHistoryChange() {
 		this.getStore('changes').reload();
 	}
 

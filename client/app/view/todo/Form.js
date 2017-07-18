@@ -33,8 +33,8 @@ Ext.define('Todo.view.todo.Form', {
 			if (Ext.isEmpty(value)) {
 				return true;
 			}
-			var inputDate = Ext.Date.parse(value, 'Y-m-d');
-			var now = new Date();
+			const inputDate = Ext.Date.parse(value, 'Y-m-d');
+			const now = new Date();
 			if (inputDate < now) {
 				return 'Must be in the future';
 			}

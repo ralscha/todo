@@ -2,11 +2,11 @@ Ext.define("Todo.EventBus", {
 	requires: [ 'Ext.data.identifier.Uuid' ],
 	singleton: true,
 
-	constructor: function() {
+	constructor() {
 		this.id = Ext.data.identifier.Uuid.create().generate();
 	},
 
-	start: function(callback) {
+	start(callback) {
 		this.eventSource = new EventSource(serverUrl + 'eventbus/' + this.id);
 		if (callback) {
 			this.eventSource.addEventListener('open', callback);
@@ -15,7 +15,7 @@ Ext.define("Todo.EventBus", {
 
 	},
 
-	stop: function(callback) {
+	stop(callback) {
 		eventBusController.unregisterClient(this.id, callback);
 		if (this.eventSource) {
 			this.eventSource.close();
@@ -23,16 +23,16 @@ Ext.define("Todo.EventBus", {
 		}
 	},
 
-	onError: function(event) {
+	onError(event) {
 		eventBusController.logClientCrash(event.type, event.detail);
 	},
 
-	subscribe: function(eventName, listener) {
+	subscribe(eventName, listener) {
 		eventBusController.subscribe(this.id, eventName);
 		this.eventSource.addEventListener(eventName, listener, false);
 	},
 
-	unsubscribe: function(eventName, listener) {
+	unsubscribe(eventName, listener) {
 		eventBusController.unsubscribe(this.id, eventName);
 		this.eventSource.removeEventListener(eventName, listener, false);
 	}

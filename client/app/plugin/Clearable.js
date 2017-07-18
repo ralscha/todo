@@ -7,10 +7,10 @@ Ext.define('Todo.plugin.Clearable', {
 		weight: -100
 	},
 
-	init: function(field) {
-		var plugin = this;
-		var toggleEvent = field.clearableEvent || plugin.getToggleEvent();
-		var weight = plugin.getWeight();
+	init(field) {
+		const plugin = this;
+		const toggleEvent = field.clearableEvent || plugin.getToggleEvent();
+		const weight = plugin.getWeight();
 
 		// <debug>
 		if (!field.isXType('textfield')) {
@@ -40,13 +40,13 @@ Ext.define('Todo.plugin.Clearable', {
 		}));
 
 		field.on('render', function() {
-			var listeners = {
+			const listeners = {
 				destroyable: true
 			};
 
 			listeners[toggleEvent] = function(field) {
-				var fieldValue = field.getValue();
-				var hasValue = false;
+				let fieldValue = field.getValue();
+				let hasValue = false;
 
 				switch (field.getXType()) {
 				case 'numberfield':
@@ -68,8 +68,8 @@ Ext.define('Todo.plugin.Clearable', {
 		Ext.Function.interceptAfter(field, 'setReadOnly', plugin.syncClearTriggerVisibility, plugin);
 	},
 
-	destroy: function() {
-		var field = this.getCmp();
+	destroy() {
+		const field = this.getCmp();
 		if (field.clearableListeners) {
 			field.clearableListeners.destroy();
 		}
@@ -79,11 +79,11 @@ Ext.define('Todo.plugin.Clearable', {
 	 * Considers all conditions to set trigger visibility. Can be overridden to influence
 	 * when trigger is made visible.
 	 */
-	syncClearTriggerVisibility: function() {
-		var field = this.getCmp();
-		var value = field.getValue();
-		var clearTrigger = field.getTrigger('clear');
-		var isReadOnly = field.readOnly;
+	syncClearTriggerVisibility() {
+		const field = this.getCmp();
+		const value = field.getValue();
+		const clearTrigger = field.getTrigger('clear');
+		const isReadOnly = field.readOnly;
 
 		clearTrigger[value && !isReadOnly ? 'show' : 'hide']();
 	}

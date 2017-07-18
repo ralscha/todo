@@ -13,7 +13,7 @@ Ext.define('Todo.Application', {
         }
     },
 
-	launch: function() {
+	launch() {
 		REMOTING_API.url = serverUrl + REMOTING_API.url;
 		REMOTING_API.maxRetries = 0;
 
@@ -22,7 +22,7 @@ Ext.define('Todo.Application', {
 		this.callParent(arguments);
 	},
 
-	onAppUpdate: function() {
+	onAppUpdate() {
 		window.location.reload();
 	}
 });

@@ -3,3 +3,14 @@
  *  styling should be located the view's corresponding scss file.
  */
 $enable-font-awesome: dynamic(true);
+
+span.label {
+	padding: 0.2em 0.6em 0.3em;
+	border-radius: 0.25em;
+	color: black;
+}
+
+span.label-info {
+    background-color: $tag-field-item-background-color;
+    margin-right: 3px
+}
