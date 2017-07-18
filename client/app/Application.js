@@ -1,19 +1,19 @@
 Ext.define('Todo.Application', {
 	extend: 'Ext.app.Application',
-	requires: [ 'Ext.plugin.Viewport', 'Todo.*', 'Ext.direct.*', 'Ext.window.Toast', 'Ext.form.action.DirectSubmit',
-			'Ext.form.action.DirectLoad', 'Ext.container.Container' ],
+	requires: [ 'Ext.direct.*', 'Ext.plugin.Viewport' ],
 	name: 'Todo',
 
 	stores: [],
 	defaultToken: 'todo',
 	
-	launch: function() {
-		// <debug>
-		Ext.Ajax.on('beforerequest', function(conn, options, eOpts) {
-			options.withCredentials = true;
-		}, this);
-		// </debug>
+    quickTips: false,
+    platformConfig: {
+        desktop: {
+            quickTips: true
+        }
+    },
 
+	launch: function() {
 		REMOTING_API.url = serverUrl + REMOTING_API.url;
 		REMOTING_API.maxRetries = 0;
 

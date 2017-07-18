@@ -1,6 +1,5 @@
 Ext.define('Todo.view.main.Main', {
 	extend: 'Ext.tab.Panel',
-	requires: [ 'Ext.plugin.Viewport' ],
 
 	controller: {
 		xclass: 'Todo.view.main.MainController'
