@@ -1,5 +1,7 @@
 package ch.rasc.todo.service;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.scheduling.annotation.Async;
@@ -25,7 +27,9 @@ public class EventBusController {
 	}
 
 	@GetMapping("/eventbus/{id}")
-	public SseEmitter eventbus(@PathVariable(value = "id") String id) {
+	public SseEmitter eventbus(@PathVariable(value = "id") String id,
+			HttpServletResponse response) {
+		response.setHeader("Cache-Control", "no-store");
 		return this.eventBus.createSseEmitter(id, SseEvent.DEFAULT_EVENT);
 	}
 
