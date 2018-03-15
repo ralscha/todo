@@ -68,13 +68,13 @@
 		<dependency>
 		    <groupId>org.javers</groupId>
 		    <artifactId>javers-core</artifactId>
-		    <version>3.8.3</version>
+		    <version>3.8.4</version>
 		</dependency>	
 		
 		<dependency>
 			<groupId>org.javers</groupId>
 			<artifactId>javers-persistence-mongo</artifactId>
-			<version>3.8.3</version>
+			<version>3.8.4</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.mongodb</groupId>
