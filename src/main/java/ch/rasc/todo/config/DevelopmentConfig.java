@@ -23,8 +23,8 @@ import ch.ralscha.extdirectspring.util.ExtDirectSpringUtil;
 class DevelopmentConfig {
 
 	@Bean
-	public FilterRegistrationBean corsFilterRegistration() {
-		FilterRegistrationBean filter = new FilterRegistrationBean();
+	public FilterRegistrationBean<CorsFilter> corsFilterRegistration() {
+		FilterRegistrationBean<CorsFilter> filter = new FilterRegistrationBean<>();
 		CorsConfiguration config = new CorsConfiguration();
 		config.setAllowedOrigins(Collections.singletonList(CorsConfiguration.ALL));
 		config.setAllowedMethods(Collections.singletonList(CorsConfiguration.ALL));

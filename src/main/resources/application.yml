@@ -3,8 +3,9 @@ mongodb:
 
 server:
   port: 80
-  session:
-    timeout: 480
+  servlet:
+    session:
+      timeout: 480
   compression:
      enabled: true
      mime-types: text/html,text/xml,text/plain,text/css,application/json,application/javascript
@@ -16,7 +17,8 @@ spring:
       write-date-timestamps-as-nanoseconds: false
   
   resources:
-    cache-period: 31556926
+    cache:
+      period: 31556926
   
   mvc:
     favicon:
