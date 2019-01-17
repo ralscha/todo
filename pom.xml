@@ -12,7 +12,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.1.RELEASE</version>
+		<version>2.1.2.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -98,7 +98,7 @@
 		<dependency>
 			<groupId>org.immutables</groupId>
 			<artifactId>value</artifactId>
-			<version>2.7.3</version>
+			<version>2.7.4</version>
 			<scope>provided</scope>
 		</dependency>
 	
@@ -141,7 +141,7 @@
 						<path>
 							<groupId>org.springframework.boot</groupId>
 							<artifactId>spring-boot-configuration-processor</artifactId>
-							<version>2.1.1.RELEASE</version>
+							<version>2.1.2.RELEASE</version>
 						</path>
 						<path>
 							<groupId>ch.rasc</groupId>
@@ -156,7 +156,7 @@
 						<path>
 							<groupId>org.immutables</groupId>
 							<artifactId>value</artifactId>
-							<version>2.7.3</version>
+							<version>2.7.4</version>
 						</path>							
 					</annotationProcessorPaths>
 				</configuration>
